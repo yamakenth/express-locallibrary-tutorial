@@ -149,7 +149,7 @@ exports.author_update_get = function(req, res, next) {
     Author.findById(req.params.id).exec(function (err, author) {
         if (err) { return next(err); }
         if (author==null) { // No results.
-            var err = new Error('Book not found');
+            var err = new Error('Author not found');
             err.status = 404;
             return next(err);
         }
