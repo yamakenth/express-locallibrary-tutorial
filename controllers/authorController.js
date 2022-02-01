@@ -143,6 +143,23 @@ exports.author_update_get = function(req, res) {
     res.send('NOT IMPLEMENTED: Author update GET');
 };
 
+// Display Author update form on GET.
+exports.author_update_get = function(req, res, next) {
+
+    Author.findById(req.params.id).exec(function (err, author) {
+        if (err) { return next(err); }
+        if (author==null) { // No results.
+            var err = new Error('Book not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Success.
+        res.render('author_form', { title: 'Update Author', author: author });
+    });
+
+};
+
+
 // Handle Author update on POST.
 exports.author_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Author update POST');
